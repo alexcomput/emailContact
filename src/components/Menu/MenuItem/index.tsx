@@ -14,7 +14,6 @@ interface menuItemProps extends HTMLAttributes<HTMLLIElement> {
 }
 
 const MenuItem: React.FC<menuItemProps> = ({ id, name, children, ...rest }) => {
-  const [menuItem, setMenuItem] = useState<menuItemSubmenuProps>();
   const [count, setCount] = useState(null);
 
   const data = useEffect(() => {
@@ -24,7 +23,7 @@ const MenuItem: React.FC<menuItemProps> = ({ id, name, children, ...rest }) => {
   }, []);
   return (
     <Container {...rest}>
-      <NavLink to={`${id}`}>
+      <NavLink to={`/dashboard/${id}`}>
         {name} <span>{count}</span>
       </NavLink>
       {children}

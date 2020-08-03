@@ -6,8 +6,6 @@ import SingIn from '../pages/Signin';
 
 import Dashboard from '../pages/Dashboard';
 
-import Sidebar from '../components/Sidebar';
-
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={SingIn} />
