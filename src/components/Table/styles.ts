@@ -12,7 +12,7 @@ export const AvatarTable = styled.div`
     text-decoration: none;
     border: 2px solid #2c365e;
     display: flex;
-    color: #fff;
+    color: #2c365e;
     align-items: center;
     justify-content: center;
     font-weight: bolder;
