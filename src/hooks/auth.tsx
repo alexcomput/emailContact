@@ -20,8 +20,8 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>(() => {
-    const token = localStorage.getItem('@portalFilizal:token');
-    const user = localStorage.getItem('@portalFilizal:user');
+    const token = localStorage.getItem('@juntossomosforte:token');
+    const user = localStorage.getItem('@juntossomosforte:user');
 
     if (token && user) {
       return { token, user: JSON.parse(user) };
@@ -31,8 +31,8 @@ const AuthProvider: React.FC = ({ children }) => {
   });
 
   const singOut = useCallback(async () => {
-    localStorage.removeItem('@portalFilizal:token');
-    localStorage.removeItem('@portalFilizal:user');
+    localStorage.removeItem('@juntossomosforte:token');
+    localStorage.removeItem('@juntossomosforte:user');
 
     setData({} as AuthState);
   }, []);
@@ -47,8 +47,8 @@ const AuthProvider: React.FC = ({ children }) => {
       };
 
       if (token && user) {
-        localStorage.setItem('@portalFilizal:token', token);
-        localStorage.setItem('@portalFilizal:user', JSON.stringify(user));
+        localStorage.setItem('@juntossomosforte:token', token);
+        localStorage.setItem('@juntossomosforte:user', JSON.stringify(user));
 
         setData({ token, user });
       }

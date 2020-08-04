@@ -1,38 +1,25 @@
-import React, { TableHTMLAttributes, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import api from '../../services/api';
+import React, { TableHTMLAttributes } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Container, AvatarTable } from './styles';
 
-export interface emailDetailsProps {
+interface subMenuItem {
   id: string;
   name: string;
   subject: string;
   owner: string;
-  users: any[];
+  users: string[];
 }
 
-interface emailsProps {
-  id: number;
-  subMenuItems: emailDetailsProps[];
+export interface emailsProps extends TableHTMLAttributes<HTMLTableElement> {
+  subMenuItems: subMenuItem[];
 }
 
-const Table: React.FC = ({ ...rest }) => {
-  const [list, setList] = useState<emailsProps>();
-  const { id } = useParams();
-
-  useEffect(() => {
-    if (id) {
-      api.get(`items/${id}`).then((response) => {
-        setList(response.data);
-      });
-    }
-  }, [list]);
-
+const Table: React.FC<emailsProps> = ({ subMenuItems, ...rest }) => {
   return (
     <Container {...rest}>
       <tbody>
-        {list?.subMenuItems.map((email, index) => {
+        {subMenuItems.map((email, index) => {
           return (
             <tr key={index}>
               <td>

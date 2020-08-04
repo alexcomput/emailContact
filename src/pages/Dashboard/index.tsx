@@ -1,47 +1,43 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+  TableHTMLAttributes,
+} from 'react';
 
-import { Link } from 'react-router-dom';
-import { FiMoreVertical, FiFilter } from 'react-icons/fi';
+import { FiFilter } from 'react-icons/fi';
 
 import { Form } from '@unform/web';
-import {
-  Container,
-  PainelA,
-  Header,
-  Avatar,
-  AvatarTable,
-  PainelB,
-} from './sytles';
+import { useParams } from 'react-router-dom';
+import { Container, PainelB } from './styles';
 
-import Menu from '../../components/Menu';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import Table from '../../components/Table';
+import Table, { emailsProps } from '../../components/Table';
+import api from '../../services/api';
 
 const Dashboard: React.FC = () => {
   const handleSubmit = useCallback(() => {}, []);
+  const { id } = useParams();
+  const [list, setList] = useState<emailsProps>();
+
+  useEffect(() => {
+    if (id > 0) {
+      try {
+        api.get(`items/${id}`).then((response) => {
+          setList(response.data);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }, [id]);
 
   return (
     <Container>
-      <PainelA>
-        <Header>
-          <Avatar>
-            <Link to="#/"> OA</Link>
-          </Avatar>
-          <div className="favorite">
-            <div>
-              Favorito
-              <FiMoreVertical size={15} />
-            </div>
-            <strong>30</strong>
-          </div>
-        </Header>
-        <Menu />
-      </PainelA>
       <PainelB>
         <Form onSubmit={handleSubmit}>
           <Input label="Pesquisar" name="username" />
-
           <div className="button-menu">
             <div>
               <Input type="checkbox" className="checkbox" name="dde" />
@@ -52,8 +48,7 @@ const Dashboard: React.FC = () => {
             </div>
             <FiFilter size={20} />
           </div>
-
-          <Table />
+          {list && <Table subMenuItems={list?.subMenuItems} />}
         </Form>
       </PainelB>
     </Container>

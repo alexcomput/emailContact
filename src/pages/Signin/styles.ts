@@ -171,6 +171,7 @@ export const AnimationContainer = styled.div`
     }
   }
 `;
+
 export const Background = styled.div`
   flex: 1;
   /* 
