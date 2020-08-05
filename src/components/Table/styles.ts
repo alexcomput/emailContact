@@ -26,6 +26,10 @@ export const Container = styled.table`
     }
   }
 
+  .td-first {
+    padding: 6px;
+    width: 30px;
+  }
   .checkbox {
     width: 20px;
     height: 20px;
@@ -50,27 +54,41 @@ export const Container = styled.table`
 interface avatarProps {
   height?: number;
   width?: number;
-  isFocused?: boolean;
+  index: number;
+  isFocused?: isFocusProps;
+  isCheched?: opemMenuProps[];
+}
+
+
+interface opemMenuProps {
+  status: boolean;
+  index: number;
+}
+
+interface isFocusProps {
+  status: boolean;
+  index: number;
 }
 
 export const AvatarTable = styled.div<avatarProps>`
+  background: #fff;
+  color: #64358c;
   text-decoration: none;
-  border: 2px solid #fff;
+  border: 2px solid #64358c;
   display: flex;
-  color: #fff;
   align-items: center;
   justify-content: center;
   font-weight: bolder;
   font-size: 16px;
   border-radius: 50%;
-  display: none;
-  
+
   ${(props) =>
-    props.isFocused &&
+    ((props.isFocused?.index === props.index &&
+      props.isFocused?.status) || props.isCheched?.find(checked => checked.index === props.index && checked.status)) &&
     css`
-      display: none;
+      display: none !important;
     `}
-       
-  width: ${(props) => `${props.width}px` || `${30}px`};
-  height: ${(props) => `${props.height}px` || `${30}px`};
+
+width: ${ (props) => `${props.width}px` || `${30}px`};
+height: ${ (props) => `${props.height}px` || `${30}px`};
 `;

@@ -19,11 +19,11 @@ const appearFromLeft = keyframes`
 
 export const Container = styled.div<containerProps>`
 
-    background: #F8F9FA; 
+    background: #F8F9FA;
     padding: 16px;
-    color: #B6B8D6; 
+    color: #B6B8D6;
     position: relative;
-    padding: 2px; 
+    padding: 2px;
 
   ${(props) =>
     props.isErrored &&
@@ -32,15 +32,15 @@ export const Container = styled.div<containerProps>`
     `}
 
     ${(props) =>
-      props.isFocused &&
-      css`
+    props.isFocused &&
+    css`
         color: #64358c;
         border-color: #64358c;
       `}
-      
+
     ${(props) =>
-      props.isFilled &&
-      css`
+    props.isFilled &&
+    css`
         color: #64358c;
       `}
 
@@ -51,15 +51,15 @@ export const Container = styled.div<containerProps>`
       flex: 1;
       border: 0;
       border-bottom: 2px solid #B6B8D6;
-      
-      font-weight: 600; 
+
+      font-weight: 600;
       font-size: 1.7rem;
       line-height: 2.3rem;
-      text-align: start; 
+      text-align: start;
       margin-top: 56px;
       width: 100%;
-      height: 100%; 
-      padding: 0px 0 7px 4px; 
+      height: 100%;
+      padding: 0px 0 7px 4px;
 
       &:hover {
           border-bottom: 2px solid #64358C;
@@ -68,7 +68,7 @@ export const Container = styled.div<containerProps>`
       &::placeholder {
           color: rgba(0, 0, 0, 0.25);
       }
-    } 
+    }
 
     label {
       position: absolute;
@@ -77,7 +77,7 @@ export const Container = styled.div<containerProps>`
       width: 100%;
       height: 100%;
       pointer-events: none;
-      
+
       span {
           font-weight: 600;
         font-size: 1.7rem;
@@ -90,7 +90,7 @@ export const Container = styled.div<containerProps>`
       span svg {
         margin-bottom: 0;
         margin-right: 18px;
-      } 
+      }
 
   }
 
@@ -101,22 +101,22 @@ export const Container = styled.div<containerProps>`
     transition: all 0.3s ease;
 
     ${(props) =>
-      props.isFilled &&
-      css`
+    props.isFilled &&
+    css`
         transform: translateY(-150%);
         svg {
           color: #623f99;
         }
       `}
-     
+
 
     ${(props) =>
-      props.isFocused &&
-      css`
+    props.isFocused &&
+    css`
         transform: translateY(-150%);
       `}
   }
-  
+
 `;
 
 export const Error = styled(Tooltip)`
