@@ -2,7 +2,7 @@ import styled, { css, keyframes } from 'styled-components';
 
 import Tooltip from '../Tooltip';
 
-interface ContainerProps {
+interface containerProps {
   isFocused: boolean;
   isFilled: boolean;
   isErrored: boolean;
@@ -17,7 +17,7 @@ const appearFromLeft = keyframes`
   }
 `;
 
-export const Container = styled.div<ContainerProps>`
+export const Container = styled.div<containerProps>`
 
     background: #F8F9FA; 
     padding: 16px;
