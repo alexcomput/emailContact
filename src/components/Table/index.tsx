@@ -26,21 +26,16 @@ const Table: React.FC<emailsProps> = ({ subMenuItems, ...rest }) => {
   const [isFocused, setIsFocused] = useState<opemMenuProps>();
   const [isChecked, setIsChecked] = useState<opemMenuProps[]>([]);
 
-  const handleTableOver = useCallback(
-    (index: number) => {
-      setIsFocused({ index, status: true });
-
-    }, [isFocused]
-  );
+  const handleTableOver = useCallback((index: number) => {
+    setIsFocused({ index, status: true });
+  }, []);
 
   const handleChecked = useCallback(
     (index: number) => {
-
       const listCheck = isChecked.filter((check) => {
-        if (check.index === index)
-          check.status = !check.status;
+        if (check.index === index) check.status = !check.status;
         return check;
-      })
+      });
 
       const conf = listCheck.filter((check) => check.index === index);
 
@@ -50,15 +45,15 @@ const Table: React.FC<emailsProps> = ({ subMenuItems, ...rest }) => {
       } else {
         setIsChecked([...listCheck]);
       }
-
-    }, [isChecked]
+    },
+    [isChecked]
   );
 
   const handleTableOut = useCallback(
     (index: number) => {
-
       setIsFocused({ index, status: false });
-    }, [isFocused]
+    },
+    [isFocused]
   );
 
   return (
@@ -66,11 +61,32 @@ const Table: React.FC<emailsProps> = ({ subMenuItems, ...rest }) => {
       <tbody>
         {subMenuItems.map((email, index: number) => {
           return (
-            <tr key={index} onMouseOver={() => handleTableOver(index)} onMouseOut={() => handleTableOut(index)}>
+            <tr
+              key={index}
+              onMouseOver={() => handleTableOver(index)}
+              onMouseOut={() => handleTableOut(index)}
+            >
               <td className="td-first">
-                <Checkbox type='checkbox' onClick={() => handleChecked(index)} className="checkbox" name={email.id}
-                  isVisible={!(isFocused?.index == index && isFocused?.status || isChecked.find(cheched => cheched.index === index)?.status)} />
-                <AvatarTable height={50} width={50} index={index} isFocused={isFocused} isCheched={isChecked}>
+                <Checkbox
+                  type="checkbox"
+                  onClick={() => handleChecked(index)}
+                  className="checkbox"
+                  name={email.id}
+                  isVisible={
+                    !(
+                      (isFocused?.index === index && isFocused?.status) ||
+                      isChecked.find((cheched) => cheched.index === index)
+                        ?.status
+                    )
+                  }
+                />
+                <AvatarTable
+                  height={50}
+                  width={50}
+                  index={index}
+                  isFocused={isFocused}
+                  isCheched={isChecked}
+                >
                   {email.owner}
                 </AvatarTable>
               </td>
@@ -87,7 +103,12 @@ const Table: React.FC<emailsProps> = ({ subMenuItems, ...rest }) => {
                   <div className="circle-users">
                     {email.users.map((user, index) => {
                       return (
-                        <AvatarTable key={index} index={index} height={30} width={30}>
+                        <AvatarTable
+                          key={index}
+                          index={index}
+                          height={30}
+                          width={30}
+                        >
                           {user}
                         </AvatarTable>
                       );

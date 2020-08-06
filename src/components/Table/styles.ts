@@ -15,14 +15,15 @@ export const Container = styled.table`
 
     th,
     td {
+      text-align-last: center;
+      padding: 8px;
+      text-align: left;
       div {
         display: flex;
         flex-direction: column;
         text-align: left;
         line-height: 20px;
       }
-      padding: 8px;
-      text-align: left;
     }
   }
 
@@ -59,7 +60,6 @@ interface avatarProps {
   isCheched?: opemMenuProps[];
 }
 
-
 interface opemMenuProps {
   status: boolean;
   index: number;
@@ -83,12 +83,14 @@ export const AvatarTable = styled.div<avatarProps>`
   border-radius: 50%;
 
   ${(props) =>
-    ((props.isFocused?.index === props.index &&
-      props.isFocused?.status) || props.isCheched?.find(checked => checked.index === props.index && checked.status)) &&
+    ((props.isFocused?.index === props.index && props.isFocused?.status) ||
+      props.isCheched?.find(
+        (checked) => checked.index === props.index && checked.status
+      )) &&
     css`
       display: none !important;
     `}
 
-width: ${ (props) => `${props.width}px` || `${30}px`};
-height: ${ (props) => `${props.height}px` || `${30}px`};
+width: ${(props) => `${props.width}px` || `${30}px`};
+height: ${(props) => `${props.height}px` || `${30}px`};
 `;

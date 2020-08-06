@@ -40,8 +40,6 @@ const Dashboard: React.FC = () => {
           <Input label="Pesquisar" name="username" />
           <div className="button-menu">
             <div>
-              <Input type="checkbox" className="checkbox" name="dde" />
-
               <Button>Atribuir</Button>
               <Button>Arquivar</Button>
               <Button>Agendar</Button>

@@ -32,15 +32,15 @@ export const Container = styled.div<containerProps>`
     `}
 
     ${(props) =>
-    props.isFocused &&
-    css`
+      props.isFocused &&
+      css`
         color: #64358c;
         border-color: #64358c;
       `}
 
     ${(props) =>
-    props.isFilled &&
-    css`
+      props.isFilled &&
+      css`
         color: #64358c;
       `}
 
@@ -101,8 +101,8 @@ export const Container = styled.div<containerProps>`
     transition: all 0.3s ease;
 
     ${(props) =>
-    props.isFilled &&
-    css`
+      props.isFilled &&
+      css`
         transform: translateY(-150%);
         svg {
           color: #623f99;
@@ -111,8 +111,8 @@ export const Container = styled.div<containerProps>`
 
 
     ${(props) =>
-    props.isFocused &&
-    css`
+      props.isFocused &&
+      css`
         transform: translateY(-150%);
       `}
   }
