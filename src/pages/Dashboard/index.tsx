@@ -9,7 +9,7 @@ import { FiFilter } from 'react-icons/fi';
 
 import { Form } from '@unform/web';
 import { useParams } from 'react-router-dom';
-import { Container, PainelB } from './styles';
+import { Container } from './styles';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -35,20 +35,18 @@ const Dashboard: React.FC = () => {
 
   return (
     <Container>
-      <PainelB>
-        <Form onSubmit={handleSubmit}>
-          <Input label="Pesquisar" name="username" />
-          <div className="button-menu">
-            <div>
-              <Button>Atribuir</Button>
-              <Button>Arquivar</Button>
-              <Button>Agendar</Button>
-            </div>
-            <FiFilter size={20} />
+      <Form onSubmit={handleSubmit}>
+        <Input label="Pesquisar" name="username" />
+        <div className="button-menu">
+          <div>
+            <Button>Atribuir</Button>
+            <Button>Arquivar</Button>
+            <Button>Agendar</Button>
           </div>
-          {list && <Table subMenuItems={list?.subMenuItems} />}
-        </Form>
-      </PainelB>
+          <FiFilter size={20} />
+        </div>
+        {list && <Table subMenuItems={list?.subMenuItems} />}
+      </Form>
     </Container>
   );
 };
