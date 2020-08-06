@@ -4,7 +4,7 @@ export const Container = styled.header`
   padding: 10px;
   width: 100%;
   max-width: 200px;
-  background: #4b8f8c;
+  background: ${props => props.theme.colors.secondary20};
   padding: 27px 0;
 
   .favorite {
@@ -25,7 +25,7 @@ export const Avatar = styled.div<avatarProps>`
 
   button {
     text-decoration: none;
-    border: 2px solid #2c365e;
+    border: 2px solid ${props => props.theme.colors.primary};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,21 +46,21 @@ export const Avatar = styled.div<avatarProps>`
       bottom: -4px;
       right: 0;
       position: absolute;
-      background: #c5979d;
+      background: ${props => props.theme.colors.secondary50};
       border-radius: 50%;
     }
   }
 
   ul {
     z-index: 13;
-    background: #fff;
+    background: ${props => props.theme.colors.background};
     position: relative;
     padding: 30px 10px 10px 10px;
     width: 100%;
     top: 40px;
     list-style: none;
     display: ${(props) => (props.isOpen ? 'block' : 'none')};
-    height: 50px;
+    height: 100px;
 
     li {
       display: flex;
@@ -68,8 +68,8 @@ export const Avatar = styled.div<avatarProps>`
       align-items: center;
 
       button {
-        background-color: #ffffff;
-        border: 1px solid #dadce0;
+        background-color: ${props => props.theme.colors.background};
+        border: 1px solid ${props => props.theme.colors.primary};
         border-radius: 4px;
         padding: 13px 49px;
       }

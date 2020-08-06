@@ -1,6 +1,5 @@
 import styled, { keyframes } from 'styled-components';
 
-/* import SigninBackgroundImg from '../../assets/logni-backgound.png'; */
 
 import { shade } from 'polished';
 
@@ -43,7 +42,7 @@ export const Container = styled.div`
 
   flex: 1;
   background-size: 70% 100%;
-  background: #f8f9fa;
+  background: ${props => props.theme.colors.background};
 `;
 
 export const Content = styled.div`
@@ -89,7 +88,7 @@ export const AnimationContainer = styled.div`
       font-size: 4rem;
       line-height: 5.5rem;
       font-weight: bold;
-      color: #623f99;
+      color: ${props => props.theme.colors.primary};
       font-style: normal;
       margin-bottom: 20px;
     }
@@ -97,7 +96,7 @@ export const AnimationContainer = styled.div`
     strong {
       font-size: 18px;
       line-height: 25px;
-      color: #3b3b3b;
+      color: ${props => props.theme.colors.textSecondary};
       font-style: normal;
       font-weight: normal;
     }
@@ -129,11 +128,11 @@ export const AnimationContainer = styled.div`
       .checkbox {
         left: 0px;
         top: 1px;
-        background: #ffffff;
+        background: ${props => props.theme.colors.secondary60};
         /* Space Cadet */
         box-sizing: border-box;
         all: unset;
-        border: 2px solid #b6b8d6;
+        border: 2px solid ${props => props.theme.colors.secondary};
         width: 15px;
         height: 15px;
         display: inline-block;
@@ -142,13 +141,13 @@ export const AnimationContainer = styled.div`
       }
 
       label {
-        color: #3b3b3b;
+        color: ${props => props.theme.colors.text};
         font-weight: 300;
         font-size: 1.4rem;
         line-height: 1.9rem;
 
         input:checked {
-          background-color: #64358c;
+          background-color: ${props => props.theme.colors.primary};
           width: 15px;
           height: 15px;
         }
@@ -160,13 +159,13 @@ export const AnimationContainer = styled.div`
       text-align: end;
       font-size: 1.4rem;
       line-height: 1.9rem;
-      color: #64358c;
+      color: ${props => props.theme.colors.secondary70};
       text-decoration: none;
       transition: color 0.2s;
       text-decoration-line: underline;
 
       &:hover {
-        color: ${shade(0.2, '#64358C')};
+        color: ${props => shade(0.2, props.theme.colors.secondary70)};
       }
     }
   }
@@ -174,14 +173,6 @@ export const AnimationContainer = styled.div`
 
 export const Background = styled.div`
   flex: 1;
-  /* 
-  animation: ${appearRotation} 1s; */
-
-  /* bottom: 0px;
-  background-size: 70% 100%; */
-
-  /* background: url() no-repeat center; */
-  
   background-size: 45%;
   margin: 0;
   padding: 0;
@@ -196,7 +187,7 @@ export const Background = styled.div`
     display: flex;
     flex-direction: column;
     align-items: start;
-    
+
     .logo {
       margin-left: 40px;
       margin-top: 39px;
@@ -212,13 +203,13 @@ export const Background = styled.div`
       height: 52.4rem
     }
 
-  } 
+  }
   .topRight {
     align-self: start;
-  }  
+  }
 
   .bottomLeft {
     left: 0;
-    bottom: 0;   
-  }  
+    bottom: 0;
+  }
 `;

@@ -5,7 +5,7 @@ import Tooltip from '../Tooltip';
 interface containerProps {
   isFocused: boolean;
   isFilled: boolean;
-  isErrored: boolean;
+  isError: boolean;
 }
 
 const appearFromLeft = keyframes`
@@ -19,29 +19,29 @@ const appearFromLeft = keyframes`
 
 export const Container = styled.div<containerProps>`
 
-    background: #F8F9FA;
+    background: ${props => props.theme.colors.background};
     padding: 16px;
-    color: #B6B8D6;
+    color: ${props => props.theme.colors.secondary};
     position: relative;
     padding: 2px;
 
   ${(props) =>
-    props.isErrored &&
+    props.isError &&
     css`
-      border-color: #c53030;
+      border-color:${props => props.theme.colors.secondary50};;
     `}
 
     ${(props) =>
-      props.isFocused &&
-      css`
-        color: #64358c;
-        border-color: #64358c;
+    props.isFocused &&
+    css`
+        color: ${props => props.theme.colors.secondary70};
+        border-color: ${props => props.theme.colors.secondary70};
       `}
 
     ${(props) =>
-      props.isFilled &&
-      css`
-        color: #64358c;
+    props.isFilled &&
+    css`
+        color: ${props => props.theme.colors.secondary70};;
       `}
 
 
@@ -50,8 +50,8 @@ export const Container = styled.div<containerProps>`
       background: transparent;
       flex: 1;
       border: 0;
-      border-bottom: 2px solid #B6B8D6;
-
+      border-bottom: 2px solid ${props => props.theme.colors.secondary};
+      color: ${props => props.theme.colors.text};
       font-weight: 600;
       font-size: 1.7rem;
       line-height: 2.3rem;
@@ -62,11 +62,11 @@ export const Container = styled.div<containerProps>`
       padding: 0px 0 7px 4px;
 
       &:hover {
-          border-bottom: 2px solid #64358C;
+          border-bottom: 2px solid ${props => props.theme.colors.secondary70};
       }
 
       &::placeholder {
-          color: rgba(0, 0, 0, 0.25);
+          color: ${props => props.theme.colors.text};
       }
     }
 
@@ -101,18 +101,18 @@ export const Container = styled.div<containerProps>`
     transition: all 0.3s ease;
 
     ${(props) =>
-      props.isFilled &&
-      css`
+    props.isFilled &&
+    css`
         transform: translateY(-150%);
         svg {
-          color: #623f99;
+          color: ${props => props.theme.colors.primary};
         }
       `}
 
 
     ${(props) =>
-      props.isFocused &&
-      css`
+    props.isFocused &&
+    css`
         transform: translateY(-150%);
       `}
   }
@@ -131,16 +131,16 @@ export const Error = styled(Tooltip)`
 
   strong {
     font-size: 14px;
-    color: #ff5100;
+    color: ${props => props.theme.colors.secondary70};
     line-height: 16px;
   }
 
   span {
-    background: #ff5100;
-    color: #fff;
+    background: ${props => props.theme.colors.secondary70};
+    color: ${props => props.theme.colors.text};
 
     &::before {
-      border-color: #ff5100 transparent;
+      border-color: ${props => props.theme.colors.secondary70} transparent;
     }
   }
 `;

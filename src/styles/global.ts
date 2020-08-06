@@ -13,8 +13,8 @@ export default createGlobalStyle`
   }
 
   body {
-    background: #2B193D; /* 2B193D    2C365E  484D6D 4B8F8C C5979D */
-    color: #2B193D; 
+    background: ${props => props.theme.colors.background}; /* 2B193D    2C365E  484D6D 4B8F8C C5979D */
+    color: ${props => props.theme.colors.text};
     --webkit-font-smoothing: antialiased;
   }
 

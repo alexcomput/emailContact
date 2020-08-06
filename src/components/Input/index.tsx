@@ -53,7 +53,7 @@ const Input: React.FC<inputProps> = ({
   }, [fieldName, registerField]);
 
   return (
-    <Container isErrored={!!error} isFilled={isFilled} isFocused={isFocused}>
+    <Container isError={!!error} isFilled={isFilled} isFocused={isFocused}>
       <input
         name={name}
         id={name}

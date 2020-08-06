@@ -13,9 +13,9 @@ export const AvatarTable = styled.div`
 
   a {
     text-decoration: none;
-    border: 2px solid #2c365e;
+    border: 2px solid ${props => props.theme.colors.primary};
     display: flex;
-    color: #fff;
+    color: ${props => props.theme.colors.text};
     align-items: center;
     justify-content: center;
     font-weight: bolder;
@@ -30,12 +30,10 @@ export const PainelB = styled.div`
   flex: 1;
 
   padding: 40px;
-  background: #c5979d;
+  background: ${props => props.theme.colors.background};
 
   input,
   button {
-    height: 30px;
-    width: auto;
     margin: 5px;
   }
 
@@ -54,7 +52,7 @@ export const PainelB = styled.div`
     flex-direction: column;
 
     svg {
-      color: #fff;
+      color: ${props => props.theme.colors.text};;
     }
   }
 

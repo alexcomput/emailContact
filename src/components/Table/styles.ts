@@ -1,15 +1,15 @@
 import styled, { css } from 'styled-components';
+import { shade } from 'polished';
 
 export const Container = styled.table`
-  background: #333;
+  background: ${props => props.theme.colors.background};
   border-collapse: collapse;
-  color: #d0d7d3;
+  color: ${props => props.theme.colors.textSecondary};
 
   tr {
-    border-bottom: 2px solid #f5f5f5;
-
+    border-bottom: 2px solid ${props => props.theme.colors.secondary};
     :hover {
-      background: #000000;
+      background: ${props => shade(0.2, props.theme.colors.background)};
       text-align: left;
     }
 
@@ -26,10 +26,29 @@ export const Container = styled.table`
       }
     }
   }
+  .flex{
+    display: flex;
+  }
 
   .td-first {
     padding: 6px;
-    width: 30px;
+    width: 6.5rem;
+
+    .avatar-checkbox{
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      input {
+        margin: 0;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        transition: all .1s ease-in-out;
+        position: absolute;
+      }
+    }
   }
   .checkbox {
     width: 20px;
@@ -37,7 +56,7 @@ export const Container = styled.table`
   }
 
   .text-subject {
-    color: #34bfbf;
+    color: ${props => props.theme.colors.primary};
   }
   .time-users {
     display: flex;
@@ -50,47 +69,4 @@ export const Container = styled.table`
     flex-direction: row;
     place-content: center;
   }
-`;
-
-interface avatarProps {
-  height?: number;
-  width?: number;
-  index: number;
-  isFocused?: isFocusProps;
-  isCheched?: opemMenuProps[];
-}
-
-interface opemMenuProps {
-  status: boolean;
-  index: number;
-}
-
-interface isFocusProps {
-  status: boolean;
-  index: number;
-}
-
-export const AvatarTable = styled.div<avatarProps>`
-  background: #fff;
-  color: #64358c;
-  text-decoration: none;
-  border: 2px solid #64358c;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bolder;
-  font-size: 16px;
-  border-radius: 50%;
-
-  ${(props) =>
-    ((props.isFocused?.index === props.index && props.isFocused?.status) ||
-      props.isCheched?.find(
-        (checked) => checked.index === props.index && checked.status
-      )) &&
-    css`
-      display: none !important;
-    `}
-
-width: ${(props) => `${props.width}px` || `${30}px`};
-height: ${(props) => `${props.height}px` || `${30}px`};
 `;

@@ -4,6 +4,7 @@ import { shade } from 'polished';
 export const Container = styled.nav`
   display: flex;
   flex-direction: column;
+  background: ${props => props.theme.colors.secondary20};
 
   a {
     position: relative;
@@ -12,7 +13,7 @@ export const Container = styled.nav`
     font-weight: 600;
     font-size: 16px;
     line-height: 22px;
-    color: #b6b8d6;
+    color: ${props => props.theme.colors.text};
 
     display: flex;
     align-items: baseline;
@@ -24,31 +25,31 @@ export const MenuItem = styled.ul`
   font-weight: 600;
   font-size: 16px;
   line-height: 22px;
-  color: #b6b8d6;
+  color: ${props => props.theme.colors.text};
   position: relative;
 
   .selected {
-    color: #ffffff;
+    color:  ${props => props.theme.colors.text};
     .icon-svg path {
-      fill: #ffffff;
+      fill:  ${props => props.theme.colors.text};
     }
   }
 
   :hover {
-    background: ${shade(0.2, '#2d6360')};
+    background: ${props => shade(0.2, props.theme.colors.secondary20)};
     a {
-      color: #ffffff;
+      color: ${props => props.theme.colors.text};
     }
   }
 `;
 
-interface OpemMenuProps {
+interface OpenMenuProps {
   status: boolean;
   index: number;
 }
 
 interface MenuProps {
-  isOpen?: OpemMenuProps;
+  isOpen?: OpenMenuProps;
   index: number;
 }
 
@@ -65,6 +66,6 @@ export const SubMenu = styled.ul<MenuProps>`
     `}
 
   .select-sub-menu {
-    background: #623f99;
+    background: ${props => props.theme.colors.secondary30};
   }
 `;

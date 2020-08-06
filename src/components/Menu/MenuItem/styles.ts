@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { shade, lighten } from 'polished';
+import { shade } from 'polished';
 
 export const Container = styled.li`
   position: relative;
@@ -8,7 +8,8 @@ export const Container = styled.li`
   font-weight: 600;
   font-size: 16px;
   line-height: 22px;
-  color: #b6b8d6;
+  color: ${props => shade(0.2, props.theme.colors.text)};
+  background: ${props => shade(0.2, props.theme.colors.secondary30)};
 
   display: flex;
   align-items: baseline;
@@ -23,13 +24,13 @@ export const Container = styled.li`
   }
 
   :hover {
-    background: ${lighten(0.2, '#4b8f8c')};
-    color: #36445a;
+    background:  ${props => shade(0.2, props.theme.colors.primary)};
+    color: ${props => shade(0.2, props.theme.colors.text)};;
     ::after {
       content: '';
       width: 3px;
       height: 100%;
-      background: #ff5100;
+      background: ${props => shade(0.2, props.theme.colors.secondary50)};;
       position: absolute;
       top: 0;
 

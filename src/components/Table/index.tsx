@@ -1,9 +1,8 @@
-import React, { useState, useCallback, TableHTMLAttributes } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useCallback, useMemo, TableHTMLAttributes } from 'react';
 
-import { Container, AvatarTable } from './styles';
-import Input from '../Input';
+import { Container } from './styles';
 import Checkbox from '../checkbox';
+import AvatarTable from '../../components/AvatarTable';
 
 interface subMenuItem {
   id: string;
@@ -17,14 +16,18 @@ export interface emailsProps extends TableHTMLAttributes<HTMLTableElement> {
   subMenuItems: subMenuItem[];
 }
 
-interface opemMenuProps {
+interface openMenuProps {
   status: boolean;
   index: number;
 }
 
 const Table: React.FC<emailsProps> = ({ subMenuItems, ...rest }) => {
-  const [isFocused, setIsFocused] = useState<opemMenuProps>();
-  const [isChecked, setIsChecked] = useState<opemMenuProps[]>([]);
+  const [isFocused, setIsFocused] = useState<openMenuProps>();
+  const [isChecked, setIsChecked] = useState<openMenuProps[]>([]);
+
+  const checkedItem = useMemo(() =>
+    !!isChecked.find((checked) => checked.status === true)
+    , [isChecked]);
 
   const handleTableOver = useCallback((index: number) => {
     setIsFocused({ index, status: true });
@@ -40,8 +43,7 @@ const Table: React.FC<emailsProps> = ({ subMenuItems, ...rest }) => {
       const conf = listCheck.filter((check) => check.index === index);
 
       if (conf.length === 0) {
-        const checkNew: opemMenuProps = { index, status: true };
-        setIsChecked([...listCheck, checkNew]);
+        setIsChecked([...listCheck, { index, status: true }]);
       } else {
         setIsChecked([...listCheck]);
       }
@@ -67,33 +69,34 @@ const Table: React.FC<emailsProps> = ({ subMenuItems, ...rest }) => {
               onMouseOut={() => handleTableOut(index)}
             >
               <td className="td-first">
-                <Checkbox
-                  type="checkbox"
-                  onClick={() => handleChecked(index)}
-                  className="checkbox"
-                  name={email.id}
-                  isVisible={
-                    !(
-                      (isFocused?.index === index && isFocused?.status) ||
-                      isChecked.find((cheched) => cheched.index === index)
-                        ?.status
-                    )
-                  }
-                />
-                <AvatarTable
-                  height={50}
-                  width={50}
-                  index={index}
-                  isFocused={isFocused}
-                  isCheched={isChecked}
-                >
-                  {email.owner}
-                </AvatarTable>
+                <div className="avatar-checkbox">
+                  <Checkbox
+                    type="checkbox"
+                    onClick={() => handleChecked(index)}
+                    className="checkbox"
+                    name={email.id}
+                    isVisible={
+                      !(
+                        (isFocused?.index === index && isFocused?.status)
+                        ||
+                        checkedItem)
+                    }
+                  />
+                  <AvatarTable
+                    height={50}
+                    width={50}
+                    index={index}
+                    isFocused={isFocused}
+                    isVisible={checkedItem}
+                  >
+                    {email.owner}
+                  </AvatarTable>
+                </div>
               </td>
               <td>
                 <div>
-                  <p>{email.name}</p>
-                  <p className="text-subject">{email.subject}</p>
+                  <p className="flex ">{email.name}</p>
+                  <p className="flex text-subject">{email.subject}</p>
                 </div>
               </td>
               <td>
