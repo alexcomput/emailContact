@@ -4,7 +4,7 @@ export const Container = styled.header`
   padding: 10px;
   width: 100%;
   max-width: 200px;
-  background: ${props => props.theme.colors.secondary20};
+  background: ${(props) => props.theme.colors.secondary20};
   padding: 27px 0;
 
   .favorite {
@@ -25,7 +25,7 @@ export const Avatar = styled.div<avatarProps>`
 
   button {
     text-decoration: none;
-    border: 2px solid ${props => props.theme.colors.primary};
+    border: 2px solid ${(props) => props.theme.colors.primary};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,14 +46,14 @@ export const Avatar = styled.div<avatarProps>`
       bottom: -4px;
       right: 0;
       position: absolute;
-      background: ${props => props.theme.colors.secondary50};
+      background: ${(props) => props.theme.colors.secondary50};
       border-radius: 50%;
     }
   }
 
   ul {
     z-index: 13;
-    background: ${props => props.theme.colors.background};
+    background: ${(props) => props.theme.colors.background};
     position: relative;
     padding: 30px 10px 10px 10px;
     width: 100%;
@@ -68,8 +68,8 @@ export const Avatar = styled.div<avatarProps>`
       align-items: center;
 
       button {
-        background-color: ${props => props.theme.colors.background};
-        border: 1px solid ${props => props.theme.colors.primary};
+        background-color: ${(props) => props.theme.colors.background};
+        border: 1px solid ${(props) => props.theme.colors.primary};
         border-radius: 4px;
         padding: 13px 49px;
       }

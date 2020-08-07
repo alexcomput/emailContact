@@ -2,14 +2,14 @@ import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
 export const Container = styled.table`
-  background: ${props => props.theme.colors.background};
+  background: ${(props) => props.theme.colors.background};
   border-collapse: collapse;
-  color: ${props => props.theme.colors.textSecondary};
+  color: ${(props) => props.theme.colors.textSecondary};
 
   tr {
-    border-bottom: 2px solid ${props => props.theme.colors.secondary};
+    border-bottom: 2px solid ${(props) => props.theme.colors.secondary};
     :hover {
-      background: ${props => shade(0.2, props.theme.colors.background)};
+      background: ${(props) => shade(0.2, props.theme.colors.background)};
       text-align: left;
     }
 
@@ -26,7 +26,11 @@ export const Container = styled.table`
       }
     }
   }
-  .flex{
+  .place-content-end {
+    place-content: flex-end;
+  }
+
+  .flex {
     display: flex;
   }
 
@@ -34,7 +38,7 @@ export const Container = styled.table`
     padding: 6px;
     width: 6.5rem;
 
-    .avatar-checkbox{
+    .avatar-checkbox {
       position: relative;
       display: flex;
       justify-content: center;
@@ -45,7 +49,7 @@ export const Container = styled.table`
         justify-content: center;
         align-items: center;
         display: flex;
-        transition: all .1s ease-in-out;
+        transition: all 0.1s ease-in-out;
         position: absolute;
       }
     }
@@ -56,7 +60,7 @@ export const Container = styled.table`
   }
 
   .text-subject {
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
   }
   .time-users {
     display: flex;

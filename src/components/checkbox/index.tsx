@@ -7,13 +7,8 @@ interface inputProps extends InputHTMLAttributes<HTMLInputElement> {
   isVisible?: boolean;
 }
 
-const Checkbox: React.FC<inputProps> = ({
-  name,
-  isVisible,
-  ...rest
-}) => {
+const Checkbox: React.FC<inputProps> = ({ name, isVisible, ...rest }) => {
   const [isFocused, setIsFocused] = useState(false);
-
 
   const handleInputFocus = useCallback(() => {
     setIsFocused(true);
@@ -23,12 +18,7 @@ const Checkbox: React.FC<inputProps> = ({
     setIsFocused(false);
   }, []);
 
-
-  return (
-    <Container isVisible={isVisible} isFocused={isFocused} {...rest} >
-
-    </Container>
-  );
+  return <Container isVisible={isVisible} isFocused={isFocused} {...rest} />;
 };
 
 export default Checkbox;

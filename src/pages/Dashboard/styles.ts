@@ -2,12 +2,11 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  height: 100vh;
 
   flex: 1;
 
   padding: 40px;
-  background: ${props => props.theme.colors.background};
+  background: ${(props) => props.theme.colors.background};
 
   input,
   button {
@@ -25,11 +24,12 @@ export const Container = styled.div`
     margin-top: 10px;
   }
   form {
+    width: 100%;
     display: flex;
     flex-direction: column;
 
     svg {
-      color: ${props => props.theme.colors.text};;
+      color: ${(props) => props.theme.colors.text};
     }
   }
 
@@ -46,9 +46,9 @@ export const AvatarTable = styled.div`
 
   a {
     text-decoration: none;
-    border: 2px solid ${props => props.theme.colors.primary};
+    border: 2px solid ${(props) => props.theme.colors.primary};
     display: flex;
-    color: ${props => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.text};
     align-items: center;
     justify-content: center;
     font-weight: bolder;
@@ -58,4 +58,3 @@ export const AvatarTable = styled.div`
     width: 45px;
   }
 `;
-

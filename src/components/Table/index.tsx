@@ -1,8 +1,13 @@
-import React, { useState, useCallback, useMemo, TableHTMLAttributes } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useMemo,
+  TableHTMLAttributes,
+} from 'react';
 
 import { Container } from './styles';
 import Checkbox from '../checkbox';
-import AvatarTable from '../../components/AvatarTable';
+import AvatarTable from '../AvatarTable';
 
 interface subMenuItem {
   id: string;
@@ -25,9 +30,10 @@ const Table: React.FC<emailsProps> = ({ subMenuItems, ...rest }) => {
   const [isFocused, setIsFocused] = useState<openMenuProps>();
   const [isChecked, setIsChecked] = useState<openMenuProps[]>([]);
 
-  const checkedItem = useMemo(() =>
-    !!isChecked.find((checked) => checked.status === true)
-    , [isChecked]);
+  const checkedItem = useMemo(
+    () => !!isChecked.find((checked) => checked.status === true),
+    [isChecked]
+  );
 
   const handleTableOver = useCallback((index: number) => {
     setIsFocused({ index, status: true });
@@ -77,9 +83,9 @@ const Table: React.FC<emailsProps> = ({ subMenuItems, ...rest }) => {
                     name={email.id}
                     isVisible={
                       !(
-                        (isFocused?.index === index && isFocused?.status)
-                        ||
-                        checkedItem)
+                        (isFocused?.index === index && isFocused?.status) ||
+                        checkedItem
+                      )
                     }
                   />
                   <AvatarTable
@@ -99,7 +105,7 @@ const Table: React.FC<emailsProps> = ({ subMenuItems, ...rest }) => {
                   <p className="flex text-subject">{email.subject}</p>
                 </div>
               </td>
-              <td>
+              <td className="flex place-content-end">
                 <div className="time-users">
                   <p>Hoje as 11</p>
                   <p>2 horas</p>

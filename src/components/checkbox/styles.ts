@@ -5,12 +5,11 @@ interface containerProps {
   isVisible?: boolean;
 }
 
-
 export const Container = styled.input<containerProps>`
-  background: ${props => props.theme.colors.secondary60};
+  background: ${(props) => props.theme.colors.secondary60};
   box-sizing: border-box;
   all: unset;
-  border: 2px solid ${props => props.theme.colors.primary};
+  border: 2px solid ${(props) => props.theme.colors.primary};
   width: 15px;
   height: 15px;
   display: inline-block;
@@ -18,13 +17,13 @@ export const Container = styled.input<containerProps>`
   margin-right: 5px;
 
   :checked {
-    background-color: ${props => props.theme.colors.primary};
+    background-color: ${(props) => props.theme.colors.primary};
     width: 15px;
     height: 15px;
   }
   ${(props) =>
     props.isVisible &&
     css`
-        display: none !important;
-      `}
+      display: none !important;
+    `}
 `;

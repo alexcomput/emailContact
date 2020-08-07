@@ -20,10 +20,10 @@ interface isFocusProps {
 
 export const Container = styled.div<avatarProps>`
   z-index: 15;
-  background: ${props => props.theme.colors.background};
-  color: ${props => props.theme.colors.primary};
+  background: ${(props) => props.theme.colors.background};
+  color: ${(props) => props.theme.colors.primary};
   text-decoration: none;
-  border: 2px solid ${props => props.theme.colors.primary};
+  border: 2px solid ${(props) => props.theme.colors.primary};
   display: flex;
   align-items: center;
   justify-content: center;

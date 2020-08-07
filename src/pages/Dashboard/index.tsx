@@ -4,7 +4,6 @@ import React, {
   useState,
   TableHTMLAttributes,
 } from 'react';
-
 import { FiFilter } from 'react-icons/fi';
 
 import { Form } from '@unform/web';
@@ -17,7 +16,7 @@ import Table, { emailsProps } from '../../components/Table';
 import api from '../../services/api';
 
 const Dashboard: React.FC = () => {
-  const handleSubmit = useCallback(() => { }, []);
+  const handleSubmit = useCallback(() => {}, []);
   const { id } = useParams();
   const [list, setList] = useState<emailsProps>();
 

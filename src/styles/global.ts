@@ -13,8 +13,10 @@ export default createGlobalStyle`
   }
 
   body {
-    background: ${props => props.theme.colors.background}; /* 2B193D    2C365E  484D6D 4B8F8C C5979D */
-    color: ${props => props.theme.colors.text};
+    background: ${(props) =>
+      props.theme.colors
+        .background}; /* 2B193D    2C365E  484D6D 4B8F8C C5979D */
+    color: ${(props) => props.theme.colors.text};
     --webkit-font-smoothing: antialiased;
   }
 
@@ -35,5 +37,10 @@ export default createGlobalStyle`
     html {
       font-size: 50%;
     }
+  }
+  .switch-component{
+    position: absolute !important;
+    right: 30px;
+    top: 5px;
   }
 `;

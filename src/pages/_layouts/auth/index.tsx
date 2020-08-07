@@ -2,7 +2,11 @@ import React from 'react';
 
 import { Container } from './styles';
 
-const Default: React.FC = ({ children }) => {
+interface toggleProps {
+  toggleTheme?(): void;
+}
+
+const Default: React.FC<toggleProps> = ({ toggleTheme, children }) => {
   return <>{children}</>;
 };
 

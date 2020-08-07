@@ -1,20 +1,18 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useContext } from 'react';
 
 import { FiMoreVertical } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import Switch from 'react-switch';
 import { Container, Avatar } from './styles';
 import { useAuth } from '../../hooks/auth';
+import { useTheme } from '../../hooks/toggleTheme';
 
 import Menu from '../Menu';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { singOut } = useAuth();
-
-  const handleLogout = useCallback(async () => {
-    console.log(1);
-    await singOut();
-  }, [singOut]);
+  // const { toggleTheme } = useTheme();
 
   return (
     <Container>
@@ -24,7 +22,7 @@ const Header: React.FC = () => {
         </button>
         <ul>
           <li>
-            <button type="button" onClick={handleLogout}>
+            <button type="button" onClick={() => singOut()}>
               Sair
             </button>
           </li>

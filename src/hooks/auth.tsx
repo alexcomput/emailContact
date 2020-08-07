@@ -33,7 +33,6 @@ const AuthProvider: React.FC = ({ children }) => {
   const singOut = useCallback(async () => {
     localStorage.removeItem('@juntossomosforte:token');
     localStorage.removeItem('@juntossomosforte:user');
-    console.log('oi');
     setData({} as AuthState);
   }, []);
 

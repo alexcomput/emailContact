@@ -8,8 +8,8 @@ export const Container = styled.li`
   font-weight: 600;
   font-size: 16px;
   line-height: 22px;
-  color: ${props => shade(0.2, props.theme.colors.text)};
-  background: ${props => shade(0.2, props.theme.colors.secondary30)};
+  color: ${(props) => shade(0.2, props.theme.colors.text)};
+  background: ${(props) => shade(0.2, props.theme.colors.secondary30)};
 
   display: flex;
   align-items: baseline;
@@ -24,13 +24,13 @@ export const Container = styled.li`
   }
 
   :hover {
-    background:  ${props => shade(0.2, props.theme.colors.primary)};
-    color: ${props => shade(0.2, props.theme.colors.text)};;
+    background: ${(props) => shade(0.2, props.theme.colors.primary)};
+    color: ${(props) => shade(0.2, props.theme.colors.text)};
     ::after {
       content: '';
       width: 3px;
       height: 100%;
-      background: ${props => shade(0.2, props.theme.colors.secondary50)};;
+      background: ${(props) => shade(0.2, props.theme.colors.secondary50)};
       position: absolute;
       top: 0;
 
