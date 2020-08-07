@@ -16,9 +16,10 @@ import Table, { emailsProps } from '../../components/Table';
 import api from '../../services/api';
 
 const Dashboard: React.FC = () => {
-  const handleSubmit = useCallback(() => {}, []);
+  const handleSubmit = useCallback(() => { }, []);
   const { id } = useParams();
   const [list, setList] = useState<emailsProps>();
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     if (id > 0) {
@@ -32,10 +33,22 @@ const Dashboard: React.FC = () => {
     }
   }, [id]);
 
+
+  const handleChange = useCallback(({ e }) => {
+    setSearch(e.target.value)
+    console.log(search)
+    const filterEmail = list?.subMenuItems.filter(email => {
+      return email.name.toLowerCase().includes(search.toLowerCase());
+    });
+    console.log(filterEmail);
+    setList(list);
+  }, []);
+
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
-        <Input label="Pesquisar" name="username" />
+
+        <Input label="Pesquisar" onChange={e => handleChange(e)} name="username" />
         <div className="button-menu">
           <div>
             <Button>Atribuir</Button>

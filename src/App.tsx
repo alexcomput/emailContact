@@ -2,7 +2,6 @@ import React, { useCallback, useState, useEffect } from 'react';
 
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
-import { ToggleThemeProvider, useTheme } from './hooks/toggleTheme';
 
 import usePersistedState from './hooks/usePersistedState';
 
@@ -20,7 +19,7 @@ interface themeProps {
 }
 
 const App: React.FC = () => {
-  const [themeStorage, setThemetheme] = usePersistedState<DefaultTheme>(
+  const [themeStorage, setThemeStorage] = usePersistedState<DefaultTheme>(
     'theme',
     lightTheme
   );
@@ -28,7 +27,7 @@ const App: React.FC = () => {
     themeStorage === 'dark' ? darkTheme : lightTheme
   );
   useEffect(() => {
-    setThemetheme(theme && theme.title);
+    setThemeStorage(theme && theme.title);
   }, [theme]);
 
   const toggleTheme = useCallback(() => {
