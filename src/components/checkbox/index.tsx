@@ -1,4 +1,10 @@
-import React, { InputHTMLAttributes, useState, useCallback } from 'react';
+import React, {
+  InputHTMLAttributes,
+  useState,
+  useCallback,
+  useRef,
+  useEffect,
+} from 'react';
 
 import { Container } from './styles';
 
@@ -9,6 +15,7 @@ interface inputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const Checkbox: React.FC<inputProps> = ({ name, isVisible, ...rest }) => {
   const [isFocused, setIsFocused] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleInputFocus = useCallback(() => {
     setIsFocused(true);
@@ -18,7 +25,16 @@ const Checkbox: React.FC<inputProps> = ({ name, isVisible, ...rest }) => {
     setIsFocused(false);
   }, []);
 
-  return <Container isVisible={isVisible} isFocused={isFocused} {...rest} />;
+  return (
+    <Container
+      name={name}
+      ref={inputRef}
+      type="Checkbox"
+      isVisible={isVisible}
+      isFocused={isFocused}
+      {...rest}
+    />
+  );
 };
 
 export default Checkbox;

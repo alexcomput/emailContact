@@ -4,7 +4,7 @@ export interface avatarProps {
   height?: number;
   width?: number;
   index: number;
-  isFocused?: isFocusProps;
+  isFocused?: boolean;
   isVisible?: boolean;
 }
 
@@ -35,8 +35,7 @@ export const Container = styled.div<avatarProps>`
   transition-duration: 83ms;
 
   ${(props) =>
-    ((props.isFocused?.index === props.index && props.isFocused?.status) ||
-      props.isVisible) &&
+    (props.isFocused || props.isVisible) &&
     css`
       visibility: hidden;
     `}

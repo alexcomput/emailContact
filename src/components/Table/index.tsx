@@ -3,13 +3,14 @@ import React, {
   useCallback,
   useMemo,
   TableHTMLAttributes,
+  useEffect,
 } from 'react';
 
 import { Container } from './styles';
 import Checkbox from '../checkbox';
 import AvatarTable from '../AvatarTable';
 
-interface subMenuItem {
+export interface subMenuItem {
   id: string;
   name: string;
   subject: string;
@@ -19,51 +20,54 @@ interface subMenuItem {
 
 export interface emailsProps extends TableHTMLAttributes<HTMLTableElement> {
   subMenuItems: subMenuItem[];
+  setListSelect(data: subMenuItem[]): void;
+  listSelect: subMenuItem[];
 }
 
-interface openMenuProps {
-  status: boolean;
-  index: number;
-}
+const Table: React.FC<emailsProps> = ({
+  subMenuItems,
+  setListSelect,
+  listSelect,
+  ...rest
+}) => {
+  const [isFocused, setIsFocused] = useState<subMenuItem>();
 
-const Table: React.FC<emailsProps> = ({ subMenuItems, ...rest }) => {
-  const [isFocused, setIsFocused] = useState<openMenuProps>();
-  const [isChecked, setIsChecked] = useState<openMenuProps[]>([]);
+  const isCheckedAll = useMemo(() => {
+    return listSelect.length > 0;
+  }, [listSelect]);
 
-  const checkedItem = useMemo(
-    () => !!isChecked.find((checked) => checked.status === true),
-    [isChecked]
+  const handleTableOver = useCallback(
+    (email: subMenuItem) => {
+      setIsFocused(email);
+    },
+    [setIsFocused]
   );
-
-  const handleTableOver = useCallback((index: number) => {
-    setIsFocused({ index, status: true });
-  }, []);
+  useEffect(() => {
+    setListSelect(listSelect);
+  }, [listSelect, setListSelect]);
 
   const handleChecked = useCallback(
-    (index: number) => {
-      const listCheck = isChecked.filter((check) => {
-        if (check.index === index) check.status = !check.status;
-        return check;
+    (email: subMenuItem) => {
+      const checkedIndex = listSelect.findIndex((checked) => {
+        if (checked.id === email.id) return true;
       });
 
-      const conf = listCheck.filter((check) => check.index === index);
-
-      if (conf.length === 0) {
-        setIsChecked([...listCheck, { index, status: true }]);
+      if (checkedIndex > -1) {
+        listSelect.splice(checkedIndex, 1);
       } else {
-        setIsChecked([...listCheck]);
+        listSelect.push(email);
       }
+      setListSelect([...listSelect]);
     },
-    [isChecked]
+    [listSelect, setListSelect]
   );
 
   const handleTableOut = useCallback(
-    (index: number) => {
-      setIsFocused({ index, status: false });
+    (email: subMenuItem) => {
+      setIsFocused(undefined);
     },
     [isFocused]
   );
-
   return (
     <Container {...rest}>
       <tbody>
@@ -71,29 +75,25 @@ const Table: React.FC<emailsProps> = ({ subMenuItems, ...rest }) => {
           return (
             <tr
               key={index}
-              onMouseOver={() => handleTableOver(index)}
-              onMouseOut={() => handleTableOut(index)}
+              onMouseOver={() => handleTableOver(email)}
+              onMouseOut={() => handleTableOut(email)}
             >
               <td className="td-first">
                 <div className="avatar-checkbox">
                   <Checkbox
                     type="checkbox"
-                    onClick={() => handleChecked(index)}
+                    onClick={() => handleChecked(email)}
                     className="checkbox"
                     name={email.id}
-                    isVisible={
-                      !(
-                        (isFocused?.index === index && isFocused?.status) ||
-                        checkedItem
-                      )
-                    }
+                    id={email.id}
+                    isVisible={!(isFocused?.id === email.id || isCheckedAll)}
                   />
                   <AvatarTable
                     height={50}
                     width={50}
                     index={index}
-                    isFocused={isFocused}
-                    isVisible={checkedItem}
+                    isFocused={isFocused?.id === email.id}
+                    isVisible={isCheckedAll}
                   >
                     {email.owner}
                   </AvatarTable>

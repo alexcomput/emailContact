@@ -1,9 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useState,
-  TableHTMLAttributes,
-} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FiFilter } from 'react-icons/fi';
 
 import { Form } from '@unform/web';
@@ -12,20 +7,25 @@ import { Container } from './styles';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import Table, { emailsProps } from '../../components/Table';
+import Table, { subMenuItem } from '../../components/Table';
 import api from '../../services/api';
 
 const Dashboard: React.FC = () => {
-  const handleSubmit = useCallback(() => { }, []);
+  const handleSubmit = useCallback(() => {}, []);
   const { id } = useParams();
-  const [list, setList] = useState<emailsProps>();
+
+  const [list, setList] = useState<subMenuItem[]>([]);
+  const [listData, setListData] = useState<subMenuItem[]>([]);
+  const [listSelect, setListSelect] = useState<subMenuItem[]>([]);
+
   const [search, setSearch] = useState('');
 
   useEffect(() => {
     if (id > 0) {
       try {
         api.get(`items/${id}`).then((response) => {
-          setList(response.data);
+          setListData(response.data.subMenuItems);
+          setList(response.data.subMenuItems);
         });
       } catch (err) {
         console.log(err);
@@ -33,31 +33,54 @@ const Dashboard: React.FC = () => {
     }
   }, [id]);
 
+  const handleChange = useCallback(
+    (e) => {
+      setSearch(e.target.value);
+      const filterEmail = listData.filter((email) => {
+        return email.name.toLowerCase().includes(search.toLowerCase());
+      });
+      setList(filterEmail);
+    },
+    [list, setList, listData]
+  );
 
-  const handleChange = useCallback(({ e }) => {
-    setSearch(e.target.value)
-    console.log(search)
-    const filterEmail = list?.subMenuItems.filter(email => {
-      return email.name.toLowerCase().includes(search.toLowerCase());
+  const handleRemoveSelect = useCallback(() => {
+    listSelect.filter((emailSelect) => {
+      const index = list.findIndex((email) => {
+        if (email.id === emailSelect.id) {
+          return true;
+        }
+      });
+      list.splice(index, 1);
     });
-    console.log(filterEmail);
+
     setList(list);
-  }, []);
+    setListSelect([]);
+  }, [list, setList, listSelect]);
 
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
-
-        <Input label="Pesquisar" onChange={e => handleChange(e)} name="username" />
+        <Input
+          label="Pesquisar"
+          onChange={(e) => handleChange(e)}
+          name="username"
+        />
         <div className="button-menu">
           <div>
             <Button>Atribuir</Button>
-            <Button>Arquivar</Button>
+            <Button onClick={handleRemoveSelect}>Arquivar</Button>
             <Button>Agendar</Button>
           </div>
           <FiFilter size={20} />
         </div>
-        {list && <Table subMenuItems={list?.subMenuItems} />}
+        {list && (
+          <Table
+            subMenuItems={list}
+            listSelect={listSelect}
+            setListSelect={setListSelect}
+          />
+        )}
       </Form>
     </Container>
   );
