@@ -16,50 +16,26 @@ export interface subMenuItem {
   subject: string;
   owner: string;
   users: string[];
+  checked: boolean;
 }
 
 export interface emailsProps extends TableHTMLAttributes<HTMLTableElement> {
-  subMenuItems: subMenuItem[];
-  setListSelect(data: subMenuItem[]): void;
-  listSelect: subMenuItem[];
+  list: subMenuItem[];
+  setList(data: subMenuItem[]): void;
 }
 
-const Table: React.FC<emailsProps> = ({
-  subMenuItems,
-  setListSelect,
-  listSelect,
-  ...rest
-}) => {
+const Table: React.FC<emailsProps> = ({ list, setList, ...rest }) => {
   const [isFocused, setIsFocused] = useState<subMenuItem>();
 
   const isCheckedAll = useMemo(() => {
-    return listSelect.length > 0;
-  }, [listSelect]);
+    return !!list.find((data) => data.checked);
+  }, [list]);
 
   const handleTableOver = useCallback(
     (email: subMenuItem) => {
       setIsFocused(email);
     },
     [setIsFocused]
-  );
-  useEffect(() => {
-    setListSelect(listSelect);
-  }, [listSelect, setListSelect]);
-
-  const handleChecked = useCallback(
-    (email: subMenuItem) => {
-      const checkedIndex = listSelect.findIndex((checked) => {
-        if (checked.id === email.id) return true;
-      });
-
-      if (checkedIndex > -1) {
-        listSelect.splice(checkedIndex, 1);
-      } else {
-        listSelect.push(email);
-      }
-      setListSelect([...listSelect]);
-    },
-    [listSelect, setListSelect]
   );
 
   const handleTableOut = useCallback(
@@ -71,38 +47,47 @@ const Table: React.FC<emailsProps> = ({
   return (
     <Container {...rest}>
       <tbody>
-        {subMenuItems.map((email, index: number) => {
+        {list.map((data, index: number) => {
           return (
             <tr
               key={index}
-              onMouseOver={() => handleTableOver(email)}
-              onMouseOut={() => handleTableOut(email)}
+              onMouseOver={() => handleTableOver(data)}
+              onMouseOut={() => handleTableOut(data)}
             >
               <td className="td-first">
                 <div className="avatar-checkbox">
                   <Checkbox
                     type="checkbox"
-                    onClick={() => handleChecked(email)}
+                    onChange={(event) => {
+                      const { checked } = event.target;
+                      setList(
+                        list.map((d) => {
+                          if (data.id === d.id) d.checked = checked;
+                          return d;
+                        })
+                      );
+                    }}
+                    checked={data.checked}
                     className="checkbox"
-                    name={email.id}
-                    id={email.id}
-                    isVisible={!(isFocused?.id === email.id || isCheckedAll)}
+                    name={data.id}
+                    id={data.id}
+                    isVisible={!(isFocused?.id === data.id || isCheckedAll)}
                   />
                   <AvatarTable
                     height={50}
                     width={50}
                     index={index}
-                    isFocused={isFocused?.id === email.id}
+                    isFocused={isFocused?.id === data.id}
                     isVisible={isCheckedAll}
                   >
-                    {email.owner}
+                    {data.owner}
                   </AvatarTable>
                 </div>
               </td>
               <td>
                 <div>
-                  <p className="flex ">{email.name}</p>
-                  <p className="flex text-subject">{email.subject}</p>
+                  <p className="flex ">{data.name}</p>
+                  <p className="flex text-subject">{data.subject}</p>
                 </div>
               </td>
               <td className="flex place-content-end">
@@ -110,7 +95,7 @@ const Table: React.FC<emailsProps> = ({
                   <p>Hoje as 11</p>
                   <p>2 horas</p>
                   <div className="circle-users">
-                    {email.users.map((user, index) => {
+                    {data.users.map((user, index) => {
                       return (
                         <AvatarTable
                           key={index}

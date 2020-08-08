@@ -45,18 +45,21 @@ const Dashboard: React.FC = () => {
   );
 
   const handleRemoveSelect = useCallback(() => {
-    listSelect.filter((emailSelect) => {
+    /* list.filter((dataSelect) => {
       const index = list.findIndex((email) => {
-        if (email.id === emailSelect.id) {
+        if (email.id === dataSelect.id) {
           return true;
         }
       });
       list.splice(index, 1);
-    });
+    }); */
 
-    setList(list);
-    setListSelect([]);
-  }, [list, setList, listSelect]);
+    setList(
+      list.filter((data) => {
+        if (!data.checked) return data;
+      })
+    );
+  }, [list]);
 
   return (
     <Container>
@@ -74,13 +77,8 @@ const Dashboard: React.FC = () => {
           </div>
           <FiFilter size={20} />
         </div>
-        {list && (
-          <Table
-            subMenuItems={list}
-            listSelect={listSelect}
-            setListSelect={setListSelect}
-          />
-        )}
+        {listSelect}
+        {list && <Table list={list} setList={setList} />}
       </Form>
     </Container>
   );
