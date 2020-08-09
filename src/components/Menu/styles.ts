@@ -20,7 +20,7 @@ export const Container = styled.nav`
   }
 `;
 
-export const MenuItem = styled.ul`
+export const MenuItem = styled.ul<MenuProps>`
   list-style: none;
   font-weight: 600;
   font-size: 16px;
@@ -34,6 +34,27 @@ export const MenuItem = styled.ul`
       fill: ${(props) => props.theme.colors.text};
     }
   }
+  & a {
+    display: flex;
+    justify-content: space-between;
+
+    > svg {
+      position: absolute;
+
+      top: calc(50% - (60% / 2));
+      right: 20px;
+      transform: translateY(50%);
+      transition: transform 0.5s;
+    }
+
+    ${(props) =>
+      props.isOpen &&
+      css`
+        svg {
+          transform: translateY(50%) rotate(-180deg);
+        }
+      `}
+  }
 
   :hover {
     background: ${(props) => shade(0.2, props.theme.colors.secondary20)};
@@ -43,14 +64,9 @@ export const MenuItem = styled.ul`
   }
 `;
 
-interface OpenMenuProps {
-  status: boolean;
-  index: number;
-}
-
 interface MenuProps {
-  isOpen?: OpenMenuProps;
-  index: number;
+  isOpen?: boolean;
+  index?: number;
 }
 
 export const SubMenu = styled.ul<MenuProps>`
@@ -59,8 +75,7 @@ export const SubMenu = styled.ul<MenuProps>`
   display: none;
 
   ${(props) =>
-    props.isOpen?.index === props.index &&
-    props.isOpen.status &&
+    props.isOpen &&
     css`
       display: block;
     `}

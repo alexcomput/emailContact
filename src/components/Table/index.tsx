@@ -10,7 +10,7 @@ import { Container } from './styles';
 import Checkbox from '../checkbox';
 import AvatarTable from '../AvatarTable';
 
-export interface subMenuItem {
+export interface subDataItem {
   id: string;
   name: string;
   subject: string;
@@ -20,26 +20,26 @@ export interface subMenuItem {
 }
 
 export interface emailsProps extends TableHTMLAttributes<HTMLTableElement> {
-  list: subMenuItem[];
-  setList(data: subMenuItem[]): void;
+  list: subDataItem[];
+  setList(data: subDataItem[]): void;
 }
 
 const Table: React.FC<emailsProps> = ({ list, setList, ...rest }) => {
-  const [isFocused, setIsFocused] = useState<subMenuItem>();
+  const [isFocused, setIsFocused] = useState<subDataItem>();
 
   const isCheckedAll = useMemo(() => {
     return !!list.find((data) => data.checked);
   }, [list]);
 
   const handleTableOver = useCallback(
-    (email: subMenuItem) => {
+    (email: subDataItem) => {
       setIsFocused(email);
     },
     [setIsFocused]
   );
 
   const handleTableOut = useCallback(
-    (email: subMenuItem) => {
+    (email: subDataItem) => {
       setIsFocused(undefined);
     },
     [isFocused]

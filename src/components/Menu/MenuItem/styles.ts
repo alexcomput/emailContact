@@ -26,6 +26,7 @@ export const Container = styled.li`
   :hover {
     background: ${(props) => shade(0.2, props.theme.colors.primary)};
     color: ${(props) => shade(0.2, props.theme.colors.text)};
+
     ::after {
       content: '';
       width: 3px;

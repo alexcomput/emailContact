@@ -3,20 +3,21 @@ import { FiFilter } from 'react-icons/fi';
 
 import { Form } from '@unform/web';
 import { useParams } from 'react-router-dom';
+import intl from 'react-intl-universal';
 import { Container } from './styles';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import Table, { subMenuItem } from '../../components/Table';
+import Table, { subDataItem } from '../../components/Table';
 import api from '../../services/api';
 
 const Dashboard: React.FC = () => {
   const handleSubmit = useCallback(() => {}, []);
   const { id } = useParams();
 
-  const [list, setList] = useState<subMenuItem[]>([]);
-  const [listData, setListData] = useState<subMenuItem[]>([]);
-  const [listSelect, setListSelect] = useState<subMenuItem[]>([]);
+  const [list, setList] = useState<subDataItem[]>([]);
+  const [listData, setListData] = useState<subDataItem[]>([]);
+  const [listSelect, setListSelect] = useState<subDataItem[]>([]);
 
   const [search, setSearch] = useState('');
 
@@ -71,9 +72,11 @@ const Dashboard: React.FC = () => {
         />
         <div className="button-menu">
           <div>
-            <Button>Atribuir</Button>
-            <Button onClick={handleRemoveSelect}>Arquivar</Button>
-            <Button>Agendar</Button>
+            <Button>{intl.get('dashboard.attach')}</Button>
+            <Button onClick={handleRemoveSelect}>
+              {intl.get('dashboard.record')}
+            </Button>
+            <Button>{intl.get('dashboard.schedule')}</Button>
           </div>
           <FiFilter size={20} />
         </div>

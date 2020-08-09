@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
-
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
+import { TranslateProvider } from './hooks/i18n';
 
 import usePersistedState from './hooks/usePersistedState';
 
@@ -17,12 +17,16 @@ import Routes from './routes';
 interface themeProps {
   title: string;
 }
+type props = {
+  type: string;
+};
 
 const App: React.FC = () => {
   const [themeStorage, setThemeStorage] = usePersistedState<DefaultTheme>(
     'theme',
     lightTheme
   );
+
   const [theme, setTheme] = useState(
     themeStorage === 'dark' ? darkTheme : lightTheme
   );
@@ -34,14 +38,20 @@ const App: React.FC = () => {
     setTheme(themeStorage === 'light' ? darkTheme : lightTheme);
   }, [themeStorage]);
 
+  const lang = navigator.language;
+
+  // const currentLocale = locales[lang] ? navigator.language : 'pt-BR';
+
   return (
     <Router>
       <ThemeProvider theme={theme}>
-        <AppProvider toggleTheme={toggleTheme}>
-          <Routes />
-        </AppProvider>
+        <TranslateProvider>
+          <AppProvider toggleTheme={toggleTheme}>
+            <Routes />
+          </AppProvider>
 
-        <GlobalStyled />
+          <GlobalStyled />
+        </TranslateProvider>
       </ThemeProvider>
     </Router>
   );

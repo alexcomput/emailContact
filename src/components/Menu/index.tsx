@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
+import { FaCaretUp } from 'react-icons/fa';
 import api from '../../services/api';
 
 import { Container, SubMenu, MenuItem } from './styles';
@@ -9,20 +10,14 @@ interface menuProps {
   name: string;
   id?: string;
   subMenus: menuItemSubmenuProps[];
-}
-
-interface opemMenuProps {
-  status: boolean;
-  index: number;
+  isOpen: boolean;
 }
 
 const SideBar: React.FC = () => {
-  const [openMenu, setOpenMenu] = useState<opemMenuProps[]>([]);
-
   const [menus, setMenu] = useState<menuProps[]>([]);
 
-  const data = useEffect(() => {
-    const menusData = api
+  useEffect(() => {
+    api
       .get('menus')
       .then((response) => {
         setMenu(response.data);
@@ -32,27 +27,35 @@ const SideBar: React.FC = () => {
       });
   }, []);
 
-  const handleOpemMenu = useCallback(
-    (index: number) => {
-      setOpenMenu([]);
-
-      if (!(openMenu.length && openMenu[0].index === index)) {
-        setOpenMenu([{ index, status: true }]);
-      }
+  const handleOpenMenu = useCallback(
+    (menuSelect: menuProps) => {
+      setMenu(
+        menus.map((data) => {
+          if (menuSelect.id === data.id || data.isOpen) {
+            data.isOpen = !data.isOpen;
+          }
+          return data;
+        })
+      );
     },
-    [openMenu]
+    [menus]
   );
 
   return (
     <Container>
       {menus.map((menu, index: number) => {
         return (
-          <MenuItem key={index} onClick={() => handleOpemMenu(index)}>
-            <NavLink to="#" activeClassName="selected">
+          <MenuItem key={index} isOpen={menu.isOpen}>
+            <NavLink
+              to="#"
+              activeClassName="selected"
+              onClick={() => handleOpenMenu(menu)}
+            >
               <span>{menu.name}</span>
+              <FaCaretUp />
             </NavLink>
             {menu.subMenus && (
-              <SubMenu isOpen={openMenu[0]} index={index}>
+              <SubMenu isOpen={menu.isOpen} index={index}>
                 {menu.subMenus.map((subMenu, indexSub: number) => {
                   const idSub = indexSub;
                   return (

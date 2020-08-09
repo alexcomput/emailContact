@@ -1,0 +1,16 @@
+{
+  "header": {
+    "title": "Bem-vindo ao React"
+  },
+  "home": {
+    "description": "Para começar, edite o arquivo <code>src/App.js</code> e salve para atualizar."
+  },
+  "dashboard": {
+    "schedule":  "Agendar",
+    "record":  "Arquivar",
+    "attach":  "Atribuir"
+  },
+  "input": {
+      "placehorder": "Pesquisar"
+  } 
+}
