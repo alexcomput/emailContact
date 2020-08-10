@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Wrapper } from './styles';
 
-import Header from '../../../components/Header';
+import NavBar from '../../../components/NavBar';
 
 const Default: React.FC = ({ children }) => {
   return (
     <Wrapper>
-      <Header />
+      <NavBar />
       {children}
     </Wrapper>
   );

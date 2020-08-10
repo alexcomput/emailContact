@@ -4,6 +4,7 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { FiUser, FiKey } from 'react-icons/fi';
+import intl from 'react-intl-universal';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -69,13 +70,17 @@ const Signin: React.FC = () => {
         <AnimationContainer>
           <Form ref={formRef} onSubmit={handleSubmit}>
             <header />
-            <h1>Faça seu login</h1>
+            <h1>{intl.get('login.title')} </h1>
 
-            <strong>Mantenha conectado e acessa todo conteúdo.</strong>
+            <strong>{intl.get('login.sub-title')}</strong>
 
             <FieldSet>
               <div className="field">
-                <Input icon={FiUser} label="User" name="username" />
+                <Input
+                  icon={FiUser}
+                  label={intl.get('login.inputs.user')}
+                  name="username"
+                />
               </div>
             </FieldSet>
 
@@ -83,7 +88,7 @@ const Signin: React.FC = () => {
               <div className="field">
                 <Input
                   icon={FiKey}
-                  label="Senha"
+                  label={intl.get('login.inputs.password')}
                   name="password"
                   type="password"
                   className="passord"
@@ -101,13 +106,13 @@ const Signin: React.FC = () => {
                       id="scales"
                       name="scales"
                     />
-                    Lembra-me
+                    {intl.get('login.remindMe')}
                   </label>
                 </div>
               </div>
             </FieldSet>
 
-            <Button type="submit">Login</Button>
+            <Button type="submit"> {intl.get('login.login')}</Button>
           </Form>
         </AnimationContainer>
       </Content>

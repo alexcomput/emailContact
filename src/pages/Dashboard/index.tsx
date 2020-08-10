@@ -46,15 +46,6 @@ const Dashboard: React.FC = () => {
   );
 
   const handleRemoveSelect = useCallback(() => {
-    /* list.filter((dataSelect) => {
-      const index = list.findIndex((email) => {
-        if (email.id === dataSelect.id) {
-          return true;
-        }
-      });
-      list.splice(index, 1);
-    }); */
-
     setList(
       list.filter((data) => {
         if (!data.checked) return data;
@@ -66,7 +57,7 @@ const Dashboard: React.FC = () => {
     <Container>
       <Form onSubmit={handleSubmit}>
         <Input
-          label="Pesquisar"
+          label={intl.get('input.labelFind')}
           onChange={(e) => handleChange(e)}
           name="username"
         />

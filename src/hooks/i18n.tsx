@@ -3,6 +3,8 @@ import intl from 'react-intl-universal';
 import usePersistedState from './usePersistedState';
 import pt from '../locales/pt-BR.json';
 import en from '../locales/en-US.json';
+import imageUsa from '../assets/translate/usa.png';
+import imgBrazil from '../assets/translate/brazil.png';
 
 interface TranslateContextData {
   updateLang(message: string): void;
@@ -32,10 +34,24 @@ const TranslateProvider: React.FC = ({ children }) => {
     locales,
   });
 
-  const updateLang = useCallback(() => {}, []);
+  const updateLang = useCallback(
+    (index) => {
+      setTranslat(index);
+    },
+    [translate]
+  );
 
   return (
     <TranslateContext.Provider value={{ updateLang }}>
+      <div className="translate-img">
+        <a href="#" onClick={() => updateLang('en-US')}>
+          <img src={imageUsa} title="" width="30px" />
+        </a>
+        <a href="#" onClick={() => updateLang('pt-BR')}>
+          <img src={imgBrazil} title="" width="30px" />
+        </a>
+      </div>
+
       {children}
     </TranslateContext.Provider>
   );

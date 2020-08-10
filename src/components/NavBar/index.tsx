@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { FiMoreVertical } from 'react-icons/fi';
 import intl from 'react-intl-universal';
 import { Container, Avatar } from './styles';
+import Menu, { menuItemProps } from '../Menu';
+import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
 
-import NavBar from '../NavBar';
-
-const Header: React.FC = () => {
+const NavBar: React.FC = ({ children }) => {
+  const [menus, setMenu] = useState<menuItemProps[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const { singOut } = useAuth();
-  // const { toggleTheme } = useTheme();
+
+  useEffect(() => {
+    api
+      .get('menus')
+      .then((response) => {
+        setMenu(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
 
   return (
     <Container>
@@ -27,15 +38,16 @@ const Header: React.FC = () => {
         </ul>
       </Avatar>
       <div className="favorite">
-        <div>
+        <div className="display-none">
           {intl.get('favorite.title')}
           <FiMoreVertical size={15} />
         </div>
         <strong>30</strong>
       </div>
-      <NavBar />
+
+      <Menu menus={menus} setMenu={setMenu} />
     </Container>
   );
 };
 
-export default Header;
+export default NavBar;

@@ -1,32 +1,21 @@
 import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
-export const Container = styled.nav`
+export const Container = styled.ul`
   display: flex;
+  margin: 0;
+  padding: 0;
   flex-direction: column;
-  background: ${(props) => props.theme.colors.secondary20};
-
-  a {
-    position: relative;
-    padding: 15px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 22px;
-    color: ${(props) => props.theme.colors.text};
-
-    display: flex;
-    align-items: baseline;
-  }
+  align-items: center;
 `;
 
-export const MenuItem = styled.ul<MenuProps>`
+export const MenuItem = styled.li<MenuProps>`
+  width: 100%;
+
   list-style: none;
   font-weight: 600;
   font-size: 16px;
   line-height: 22px;
-  color: ${(props) => props.theme.colors.text};
-  position: relative;
 
   .selected {
     color: ${(props) => props.theme.colors.text};
@@ -34,9 +23,29 @@ export const MenuItem = styled.ul<MenuProps>`
       fill: ${(props) => props.theme.colors.text};
     }
   }
+
   & a {
+    align-items: center;
+    height: 5rem;
+    color: ${(props) => props.theme.colors.text};
+    text-decoration: none;
+    filter: grayscale(100%) opacity(0.7);
+    transition: 300ms;
     display: flex;
-    justify-content: space-between;
+
+    :hover {
+      filter: grayscale(0%) opacity(1);
+      /* background: ${(props) => props.theme.colors.secondary30}; */
+      color: ${(props) => props.theme.colors.textSecondary};
+    }
+  
+    .link-text {
+      display: none;
+      margin-left: 1rem;
+    }
+    .nav-link svg {
+      margin: 0 1.5rem;
+    }
 
     > svg {
       position: absolute;
@@ -68,19 +77,3 @@ interface MenuProps {
   isOpen?: boolean;
   index?: number;
 }
-
-export const SubMenu = styled.ul<MenuProps>`
-  display: flex;
-  flex-direction: column;
-  display: none;
-
-  ${(props) =>
-    props.isOpen &&
-    css`
-      display: block;
-    `}
-
-  .select-sub-menu {
-    background: ${(props) => props.theme.colors.secondary30};
-  }
-`;

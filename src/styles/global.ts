@@ -29,6 +29,13 @@ export default createGlobalStyle`
     font-weight: 300;
   }
 
+  body::-webkit-scrollbar{
+    width: 0.25rem;
+  }
+
+  body::-webkit-scrollbar-track {
+    background: #1e1e24;
+  }
   button {
     cursor:pointer;
   }
@@ -36,6 +43,13 @@ export default createGlobalStyle`
   @media (max-width: 768px){
     html {
       font-size: 50%;
+    }
+  }
+  .translate-img{
+    position: absolute;
+    right: 50%;
+    a {
+      margin: 10px;
     }
   }
   .switch-component{

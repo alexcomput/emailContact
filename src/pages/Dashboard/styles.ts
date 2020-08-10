@@ -5,7 +5,7 @@ export const Container = styled.div`
   height: 100vh;
   flex: 1;
 
-  padding: 40px;
+  padding: 5rem 2rem 2rem 6rem;
   background: ${(props) => props.theme.colors.background};
 
   input,

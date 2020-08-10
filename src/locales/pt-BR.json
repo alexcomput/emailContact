@@ -11,6 +11,20 @@
     "attach":  "Atribuir"
   },
   "input": {
-      "placehorder": "Pesquisar"
-  } 
+      "labelFind": "Pesquisar" 
+  },
+  "logout": "Sair",
+  "favorite": {
+    "title": "Favorito"
+  },
+  "login": {
+    "title": "Faça seu login",
+    "sub-title": "Mantenha conectado e acessa todo conteúdo.",
+    "inputs": {
+      "user": "Usuário",
+      "password": "Senha"
+    },
+    "remindMe": "Lembra-me",
+    "login": "Entrar"
+  }
 }

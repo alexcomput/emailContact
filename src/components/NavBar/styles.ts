@@ -1,11 +1,56 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-export const Container = styled.header`
-  padding: 10px;
-  width: 100%;
-  max-width: 200px;
+export const Container = styled.nav`
+  z-index: 1;
+  width: 5rem;
+  height: 100vh;
+  position: fixed;
+
+  display: flex;
+  flex-direction: column;
   background: ${(props) => props.theme.colors.secondary20};
-  padding: 27px 0;
+  transition: width 200ms ease;
+
+  :hover {
+    width: 16rem;
+  }
+  :hover .favorite .display-none {
+    display: block;
+  }
+
+  :hover .link-text {
+    display: block;
+  }
+  :hover .sub-menu-none {
+    display: flex;
+  }
+
+  .favorite {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    transform: display 5200ms ease;
+  }
+  .favorite .display-none {
+    display: none;
+  }
+
+  :ou .sub-menu-bloc {
+    display: block;
+  }
+
+  a {
+    position: relative;
+    padding: 15px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    color: ${(props) => props.theme.colors.text};
+
+    display: flex;
+    align-items: baseline;
+  }
 `;
 
 interface avatarProps {

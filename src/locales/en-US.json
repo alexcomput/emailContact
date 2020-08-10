@@ -9,5 +9,22 @@
     "schedule":  "Schedule",
     "record":  "Record",
     "attach":  "Attach"
+  },
+  "input": {
+    "labelFind": "Find" 
+  },
+  "logout": "Logout",
+  "favorite": {
+    "title": "Favorite"
+  },
+  "login": {
+    "title": "Make your login",
+    "sub-title": "Keep connected and access all content.",
+    "inputs": {
+      "user": "User",
+      "password": "Password"
+    },
+    "remindMe": "Remind me",
+    "login": "log in"
   }
 }

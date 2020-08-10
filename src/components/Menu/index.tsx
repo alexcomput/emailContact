@@ -1,34 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaCaretUp } from 'react-icons/fa';
-import api from '../../services/api';
+import { FiMenu } from 'react-icons/fi';
 
-import { Container, SubMenu, MenuItem } from './styles';
-import SubMenuItem, { menuItemSubmenuProps } from './MenuItem';
+import { Container, MenuItem } from './styles';
+import SubMenu, { subMenuItemProps } from './SubMenu';
 
-interface menuProps {
+export interface menuItemProps {
   name: string;
   id?: string;
-  subMenus: menuItemSubmenuProps[];
+  subMenus?: subMenuItemProps[];
   isOpen: boolean;
 }
 
-const SideBar: React.FC = () => {
-  const [menus, setMenu] = useState<menuProps[]>([]);
+export interface menusProps {
+  menus: menuItemProps[];
+  setMenu(menus: menuItemProps[]): void;
+}
 
-  useEffect(() => {
-    api
-      .get('menus')
-      .then((response) => {
-        setMenu(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
-
+const Menu: React.FC<menusProps> = ({ menus, setMenu }) => {
   const handleOpenMenu = useCallback(
-    (menuSelect: menuProps) => {
+    (menuSelect: menuItemProps) => {
       setMenu(
         menus.map((data) => {
           if (menuSelect.id === data.id || data.isOpen) {
@@ -40,33 +32,23 @@ const SideBar: React.FC = () => {
     },
     [menus]
   );
-
+  // key={index}
   return (
     <Container>
       {menus.map((menu, index: number) => {
         return (
-          <MenuItem key={index} isOpen={menu.isOpen}>
+          <MenuItem isOpen={menu.isOpen}>
             <NavLink
               to="#"
               activeClassName="selected"
               onClick={() => handleOpenMenu(menu)}
             >
-              <span>{menu.name}</span>
-              <FaCaretUp />
+              <FaCaretUp className="nav-link" />
+
+              <span className="link-text">{menu.name}</span>
             </NavLink>
             {menu.subMenus && (
-              <SubMenu isOpen={menu.isOpen} index={index}>
-                {menu.subMenus.map((subMenu, indexSub: number) => {
-                  const idSub = indexSub;
-                  return (
-                    <SubMenuItem
-                      id={subMenu.id}
-                      name={subMenu.name}
-                      key={idSub}
-                    />
-                  );
-                })}
-              </SubMenu>
+              <SubMenu subMenus={menu.subMenus} isOpen={menu.isOpen} />
             )}
           </MenuItem>
         );
@@ -75,4 +57,4 @@ const SideBar: React.FC = () => {
   );
 };
 
-export default SideBar;
+export default Menu;
